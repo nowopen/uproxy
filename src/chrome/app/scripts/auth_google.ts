@@ -83,7 +83,8 @@ class AuthGoogle implements AuthenticationManager {
   }
 
   public logout = () : Promise<void> => {
-    return new Promise<void>((F, R) => {
+    return Promise.resolve();  // TODO: don't submit this!
+    /*return new Promise<void>((F, R) => {
       // Logout of Google so that next time login URL is invoked user can
       // sign in with a different account.  This must be launched using
       // launchWebAuthFlow so that sandboxed environment is logged out (so
@@ -96,5 +97,6 @@ class AuthGoogle implements AuthenticationManager {
             F();
           });
     });
+  */
   }
 }

@@ -162,9 +162,13 @@
             <li ng-repeat="contact in model.roster | filter : ui.doesContactPassFilter() | limitTo : 100 | orderBy : ['-canUProxy', 'name'] track by $index"
                 ng-click="ui.focusOnUser(contact)"
                 ng-class="{offline:!contact.online}">
-              {{contact.name}}
+
+              <span class="c-name">{{contact.name}}</span>
+
               <img class="contact-image" ng-src='{{contact.imageData}}'>
+
               <span class="c-icons">
+                <!-- TODO: do the givesMe or usesMe icons ever show? -->
                 <span class="c-icon givesMe"
                     ng-class="{grey:'yes'!=contact.trust.asProxy,
                                active:contact.isActiveProxy }"
@@ -173,11 +177,10 @@
                     ng-class="{grey:'yes'!=contact.trust.asClient,
                                active:contact.isActiveClient }"
                     ng-show='contact.usesMe'></span>
-                <span class="c-icon" ng-show='contact.onGoogle'>G+</span>
-                <span class="c-icon" ng-show='contact.onFB'>FB</span>
-                <span class="c-icon" ng-show='contact.onXMPP'> XM </span>
                 <span class="c-icon canUProxy" ng-show="contact.canUProxy"></span>
+                <span class="c-icon contactRightArrow">&#62;</span>
               </span>
+
             </li>
           </ul>
           <!--
