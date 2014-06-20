@@ -476,8 +476,9 @@ input[type=text]
   font-weight: 300
   @include smooth
 
-  &.offline .c-name
-    color: #999
+  &.offline
+    -webkit-filter: grayscale(100%)
+    opacity: 0.5
 
   .c-name
     color: #3333dd

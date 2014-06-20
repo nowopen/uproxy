@@ -97,10 +97,6 @@ module UI {
     // Keep track of currently viewed contact and instance.
     // public focus :InstancePath;
     public network :string = 'google';
-    public user :User = null;
-    // TODO: combine this with currentProxyServer so there is only 1 member
-    // variable to check current proxy server status.
-    public proxyServerInstance :UI.Instance = null;
     // If we are proxying, keep track of the instance and user.
     public currentProxyServer :UI.CurrentProxy = null;
 
@@ -262,22 +258,19 @@ module UI {
      * COMMAND to the core.
      * Assumes that there is a 'current instance' available.
      */
-    public startProxying = () => {
-      if (!this.user || !this.proxyServerInstance) {
-        console.warn('Cannot start proxying without a current instance.');
-      }
+    public startProxying = (user: UI.User, instance :UI.Instance) => {
       // Prepare the instance path.
       var path = <InstancePath>{
         // TODO: Don't hardcode the network. This involves some changes to the
         // model. Do this soon.
         network: 'google',
-        userId: this.user.userId,
-        instanceId: this.proxyServerInstance.instanceId
+        userId: user.userId,
+        instanceId: instance.instanceId
       };
       this.core.start(path).then(() => {
         this.currentProxyServer = {
-          instance: this.proxyServerInstance,
-          user: this.user
+          instance: instance,
+          user: user
         };
         this._setProxying(true);
       });
@@ -288,7 +281,7 @@ module UI {
      * COMMAND to the core.
      */
     public stopProxyingUserInitiated = () => {
-      if (!this.proxyServerInstance) {
+      if (!this.currentProxyServer) {
         console.warn('Stop Proxying called while not proxying.');
         return;
       }
@@ -301,7 +294,7 @@ module UI {
      * (e.g. chrome.proxy settings).
      */
     public stopProxyingInUiAndConfig = () => {
-      if (!this.proxyServerInstance) {
+      if (!this.currentProxyServer) {
         console.warn('Stop Proxying called while not proxying.');
         return;
       }
@@ -346,7 +339,7 @@ module UI {
             (this.filters.friendsAccess && !user.usesMe)) {
           return false;
         }
-        // Otherwise, if there is no search text, this.user is visible.
+        // Otherwise, if there is no search text, user is visible.
         if (!searchText) {
           return true;
         }
@@ -365,12 +358,7 @@ module UI {
     public focusOnUser = (user:UI.User) => {
       this.view = View.ACCESS;
       console.log('focusing on user ' + user);
-      this.user = user;
-      // For now, default to the first instance that the user has.
-      // TODO: Support multiple instances in the UI.
-      if (user.instances.length > 0) {
-        this.proxyServerInstance = user.instances[0];
-      }
+      // TODO(dborkan): this is completely broken, don't submit until its fixed
     }
 
     /*
@@ -379,7 +367,6 @@ module UI {
      */
     public returnToRoster = () => {
       this.view = View.ROSTER;
-      console.log('returning to roster! ' + this.user);
     }
 
     syncInstance = (instance : any) => {}
@@ -449,11 +436,6 @@ module UI {
       user.update(profile);
       user.refreshStatus(payload.clients);
       user.instances = payload.instances;
-      // Update the 'current instance' of UI if this is the correct user.
-      // TODO: change this for multi instance support
-      if (this.user === user) {
-        this.proxyServerInstance = user.instances[0];
-      }
 
       // Update givesMe and usesMe fields based on whether any instance
       // has these permissions.
