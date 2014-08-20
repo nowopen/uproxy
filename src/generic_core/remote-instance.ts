@@ -59,11 +59,11 @@ module Core {
      */
     constructor(
         public user :Core.User,  // The User which this instance belongs to.
-        data        :Instance) {
-      this.update(<InstanceHandshake>data);
+        instanceData        :Instance) {
+      this.update(<InstanceHandshake>instanceData);
       // Load consent state if it exists. Don't load access state.
-      if (data.consent) {
-        this.consent = data.consent;
+      if (instanceData.consent) {
+        this.consent = instanceData.consent;
       }
     }
 
