@@ -61,10 +61,10 @@
     <div class='network'>
       <h1>{{ network.name }}</h1>
       <span hidden?='{{LOGGED_OUT!=state}}'>
-        <button on-tap='{{connect}}'>Connect</button>
+        <button on-tap='{{connect}}' i18n-content="connectMsg"></button>
       </span>
       <span hidden?='{{LOGGED_IN!=state}}'>
-        <button on-tap='{{disconnect}}'>Disconnect</button>
+        <button on-tap='{{disconnect}}' i18n-content="disconnectMsg"></button>
       </span>
       <span id='waiting' hidden?='{{LOGGING_IN!=state}}'>
         Waiting for sign in...

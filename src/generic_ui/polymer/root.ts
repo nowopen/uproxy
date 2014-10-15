@@ -1,5 +1,6 @@
 /// <reference path='../../interfaces/ui-polymer.d.ts' />
 /// <reference path='../scripts/ui.ts' />
+/// <reference path='../scripts/i18n.d.ts' />
 
 declare var ui :uProxy.UIAPI;
 
@@ -36,5 +37,29 @@ Polymer({
 
     ui['gestalt'] = UI.Gestalt.GIVING;
     this.loggedIn = ui['loggedIn'];
+    this.changeLanguage("it");
+  },
+  // Translation.
+
+  // Retrieve messages.json file of the appropriate language and insert
+  // strings into the application's UI.  
+  changeLanguage: function(language) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET','../locales/' + language + '/messages.json',true);
+    xhr.onload = function() {
+      if (this.readyState != 4) {
+        return;
+      }
+      //conso
+      var translations = JSON.parse(xhr.responseText);
+      for (var key in translations) {
+        if (translations.hasOwnProperty(key)) {
+          translations[key] = translations[key].message;
+        }
+      }
+      i18nTemplate.process(document, translations);
+    }
+    xhr.send(null);  
   }
+
 });

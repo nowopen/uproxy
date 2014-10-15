@@ -186,6 +186,11 @@ module.exports = (grunt) ->
           src: ['icons/*']
           dest: chromeExtDevPath
         }, {
+          # Messages
+          expand: true, cwd: 'src/'
+          src: ['locales/**']
+          dest: chromeExtDevPath
+        }, {
           expand: true, cwd: 'build/typescript-src/', flatten: true
           src: FILES.uproxy_common
             .concat [

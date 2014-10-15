@@ -52,26 +52,18 @@
     </style>
 
     <div class='view' id='intro' hidden?='{{0!==state}}'>
-      <h1>Share your pathway to the Internet</h1>
-      <p>
-      uProxy helps users protect each other from third parties who may try to
-      watch, block, or redirect users' Internet connections.
-      </p>
+      <h1 i18n-content="splashTitleMsg"></h1>
+      <p i18n-content="splashDescriptionMsg"></p>
     </div>
 
     <div class='view' id='description' hidden?='{{1!==state}}'>
-      <h1>What name should others see when this device is online?</h1>
+      <h1 i18n-content="nameDeviceMsg"></h1>
       <uproxy-description></uproxy-description>
-      <p>
-      Giving this device a name will let others know how they are connecting
-      with you. It also means you can have more than one device with uProxy
-      installed and proxy from one to the other.
-      </p>
+      <p i18n-content="nameDeviceDescriptionMsg"></p>
     </div>
 
     <uproxy-button on-tap='{{next}}' id='next'
-        img='../icons/play.png'>
-      Next
+        img='../icons/play.png' i18n-content="nextMsg">
     </uproxy-button>
 
   </template>

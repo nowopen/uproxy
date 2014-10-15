@@ -1,0 +1,23 @@
+{
+	"connectMsg" : {
+		"message" : "Collegare"
+	},
+	"disconnectMsg" : {
+		"message" : "Scollegare"
+	},
+	"splashTitleMsg" : {
+		"message" : "Condividi la tua via a Internet"
+	},
+	"splashDescriptionMsg" : {
+		"message" : "uProxy aiuta gli utenti a proteggere l'altro da parte di terzi che potrebbero provare a vedere, bloccare o reindirizzare le connessioni Internet degli utenti."
+	},
+	"nameDeviceMsg" : {
+		"message" : "Che nome gli altri dovrebbe vedere quando questo dispositivo è in linea?"
+	},
+	"nameDeviceDescriptionMsg" : {
+		"message" : "Dare questo dispositivo un nome sarà far sapere agli altri il modo in cui si connettono con voi. Significa anche che si può avere più di un dispositivo con uProxy installato e delega da uno all'altro."
+	},
+	"nextMsg" : {
+		"message" : "Prossimo"
+	}
+}

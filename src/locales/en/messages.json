@@ -1,0 +1,23 @@
+{
+	"connectMsg" : {
+		"message" : "Connect" 
+	},
+	"disconnectMsg" : {
+		"message" : "Disconnect" 
+	},
+	"splashTitleMsg" : {
+		"message" : "Share your pathway to the Internet" 
+	},
+	"splashDescriptionMsg" : {
+		"message" : "uProxy helps users protect each other from third parties who may try to watch, block, or redirect users' Internet connections." 
+	},
+	"nameDeviceMsg" : {
+		"message" : "What name should others see when this device is online?" 
+	},
+	"nameDeviceDescriptionMsg" : {
+		"message" : "Giving this device a name will let others know how they are connecting with you. It also means you can have more than one device with uProxy installed and proxy from one to the other." 
+	},
+	"nextMsg" : {
+		"message" : "Next" 
+	}
+}
